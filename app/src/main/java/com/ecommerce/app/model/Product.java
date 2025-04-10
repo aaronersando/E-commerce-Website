@@ -10,9 +10,9 @@ public record Product(
     String name,
     String description,
     Double price,
-    String imageUrl,
+    String image_url,
     
-    Integer categoryId
+    Integer category_id
 ) {
     
 
