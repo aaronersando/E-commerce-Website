@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.Assert;
 
 import com.ecommerce.app.model.Category;
 
@@ -22,4 +23,22 @@ public class CategoryRepository {
                 .list();
     }
 
+    public void saveAll(List<Category> categories) {
+        for (Category category : categories) {
+            int updated = jdbcClient.sql("INSERT INTO Category (id, name) VALUES (?, ?)")
+                    .params(category.id(), category.name()) // Bind id and name
+                    .update();
+    
+            Assert.state(updated == 1, "Failed to insert category: " + category.name());
+        }
+    }
+
+    public void deleteAll() {
+        int deleted = jdbcClient.sql("DELETE FROM category")
+                .update();
+    
+        Assert.state(deleted >= 0, "Failed to delete categories. Deleted rows: " + deleted);
+    }
 }
+
+

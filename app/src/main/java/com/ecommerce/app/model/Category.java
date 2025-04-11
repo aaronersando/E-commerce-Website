@@ -9,8 +9,8 @@ import java.util.Set;
 @With
 public record Category(
     Integer id,
-    String name,
-    Set<Integer> productIds 
+    String name
+    // Set<Integer> productIds 
 ) {
 
 }
